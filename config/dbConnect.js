@@ -2,10 +2,12 @@ import mongoose from "mongoose";
 
 const dbConnect = async()=>{
     try {
-        const connected = mongoose.connect(process.env.MONGO_URL);
+        //to connect database with string url
+
+        const connected = await mongoose.connect(process.env.MONGO_URL);
         
         mongoose.set("strictQuery",false);
-        console.log(`Mongodb connected ${(await connected).connection.host}`);
+        console.log(`Mongodb connected ${connected.connection.host}`);
 
     } catch (error) {
         console.log(`Error: ${error.message}`)
