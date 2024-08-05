@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "NodeJS E-commerce API",
   "main": "server.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon server.js",
     "start": "node server.js"
   },
   "keywords": [
@@ -16,5 +17,8 @@
   "dependencies": {
     "express": "^4.19.2",
     "mongoose": "^8.5.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
   }
 }
