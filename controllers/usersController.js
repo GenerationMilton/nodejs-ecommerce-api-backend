@@ -3,14 +3,12 @@
 // @route POST /api/v1/users/register
 // @access Private/Admin
 
+import bcrypt from "bcryptjs";
 import User from "../model/User.js";
 
 //funtion req - res to register user
 export const registerUserCtrl = async (req, res) => {
-    // res.json({
-    //     msg:"User register controller",
-    // });
-
+ 
     const {fullname, email, password} = req.body;
     //Check user exist
     const userExist = await User.findOne({email});
@@ -20,12 +18,19 @@ export const registerUserCtrl = async (req, res) => {
             msg:"User already exist",
         });
     }
+
+
     //hash password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password,salt);
+
+
+
     //create the user
     const user = await User.create({
         fullname,
         email,
-        password,
+        password:hashedPassword,
     });
     res.status(201).json({
         status:"success",
