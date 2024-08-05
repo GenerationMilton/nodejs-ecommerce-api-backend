@@ -11,6 +11,8 @@ import userRoutes from "../routes/usersRoutes.js";
 dbConnect();
 const app = express();
 
+//pass incoming data
+app.use(express.json());
 
 //routes
 app.use("/", userRoutes);
