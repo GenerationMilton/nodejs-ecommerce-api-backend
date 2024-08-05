@@ -39,3 +39,37 @@ export const registerUserCtrl = async (req, res) => {
     });
 
 };
+
+// @desc Login user
+// @route POST /api/v1/users/login
+// @access public
+
+export const loginUserCtrl = async (req,res)=>{
+    const{email, password} = req.body;
+
+    //Find the user in db by email only
+    const userFound = await User.findOne({
+        email,
+    });
+    if(userFound && await bcrypt.compare(password, userFound?.password)){
+        res.json({
+            status:'success',
+            message:'User logged in successfully',
+            userFound,
+        })
+    }else{
+        res.json({
+            msg:'Invalid login',
+        });
+    }
+    // if(!userFound){
+    //     return res.json({
+    //         msg:"Invalid login details",
+    //     });
+    // }
+    // res.json({
+    //     msg: "Login Success",
+    // });
+
+
+};
