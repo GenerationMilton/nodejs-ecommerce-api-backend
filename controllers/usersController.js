@@ -8,6 +8,7 @@ import asyncHandler from 'express-async-handler';
 import User from "../model/User.js";
 import generateToken from "../utils/generateToken.js";
 import { getTokenFromHeader } from "../utils/getTokenFromHeader.js";
+import { verifyToken } from "../utils/verifyToken.js";
 
 
 //funtion req - res to register user
@@ -75,7 +76,11 @@ export const loginUserCtrl = asyncHandler(async (req,res)=>{
 export const getUserProfileCtrl = asyncHandler(async(req,res)=>{
    
     const token = getTokenFromHeader(req);
-    console.log(token);
+    //verify token
+    const verified = verifyToken(token);
+    console.log(verified);
+
+
     res.json({
         msg:"Welcome Profile page",
     });
