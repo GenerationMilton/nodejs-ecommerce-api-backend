@@ -65,3 +65,13 @@ export const loginUserCtrl = asyncHandler(async (req,res)=>{
 
 
 });
+
+
+// @desc user profile
+// @route GET /api/v1/users/profile
+// @access Private
+export const getUserProfileCtrl = asyncHandler(async(req,res)=>{
+    res.json({
+        msg:"Welcome Profile page",
+    });
+});
