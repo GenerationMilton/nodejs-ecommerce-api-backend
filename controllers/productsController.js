@@ -39,7 +39,22 @@ export const createProductController= asyncHandler(async (req, res)=>{
 // @access Public
 
 export const getProductsController = asyncHandler(async(req, res)=>{
-    const products = await Product.find();
+    console.log(req.query);
+    //query
+    let productQuery = Product.find();
+  
+    //console.log(products);
+    
+    //search by name
+    if(req.query.name){
+        productQuery=productQuery.find({
+            name:{$regex: req.query.name, $options:"i"},
+        });
+    }
+
+      //await the query
+      const products= await productQuery;
+
     res.json({
         status:"success",
         products,
