@@ -84,6 +84,18 @@ export const getProductsController = asyncHandler(async(req, res)=>{
     });
     }
 
+    //filter by price range
+    if(req.query.price){
+        const priceRange= req.query.price.split("-");
+        //gte: greater or equal
+        //lte: less than or equal to
+        //console.log(priceRange);
+        productQuery = productQuery.find({
+            price: {$gte: priceRange[0], $lte: priceRange[1]},
+        });
+        
+    }
+
     //await the query
     const products= await productQuery;
 
