@@ -34,3 +34,15 @@ export const createProductController= asyncHandler(async (req, res)=>{
     });
 });
 
+// @desc get all products
+// @route GET /api/v1/products
+// @access Public
+
+export const getProductsController = asyncHandler(async(req, res)=>{
+    const products = await Product.find();
+    res.json({
+        status:"success",
+        products,
+    })
+})
+
